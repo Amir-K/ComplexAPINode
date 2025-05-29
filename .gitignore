@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# TypeScript
+build/
+*.tsbuildinfo
+
+# Environment variables
+.env.local
+.env.*.local
+
+# IDE and editor files
+*.swp
+*.swo
+
+# Test coverage
+coverage/
+
+# Temporary files
+tmp/
+temp/
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+
+# Build output
+*.js
+!buildall.js
+!jest.config.js
+*.d.ts 
+
+shadow
+
+nodeclient
+
+broker
+
+complexapi.txt
+
+README.md
+
+deployscript.ps1
+
+buildall.js
+
+.env.example
