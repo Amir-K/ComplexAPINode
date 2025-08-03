@@ -10,7 +10,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import sql from "mssql";
-import { initializeLiveDebugger, createShadowMiddleware } from "./nodeclient/index";
+import { initializeLiveDebugger, createShadowMiddleware, liveDebuggerMiddleware } from "./nodeclient/index";
 
 // Entities
 @Entity("Users")
@@ -59,21 +59,21 @@ class Review {
 }
 
 async function startServer() {
-  const pool = await sql.connect({
-    user: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
-    server: process.env.DATABASE_HOST!,
-    database: "amirsdatabase",
-    // options: {
-    //   encrypt: false,
-    //   trustServerCertificate: true,
-    //   port: 1433,
-    // },
-    // options: {
-    //   encrypt: true,
-    //   trustServerCertificate: true,
-    // },
-  });
+  // const pool = await sql.connect({
+  //   user: process.env.DATABASE_USERNAME,
+  //   password: process.env.DATABASE_PASSWORD,
+  //   server: process.env.DATABASE_HOST!,
+  //   database: "amirsdatabase",
+  //   // options: {
+  //   //   encrypt: false,
+  //   //   trustServerCertificate: true,
+  //   //   port: 1433,
+  //   // },
+  //   // options: {
+  //   //   encrypt: true,
+  //   //   trustServerCertificate: true,
+  //   // },
+  // });
 
   initializeLiveDebugger({
     env: {
@@ -82,13 +82,14 @@ async function startServer() {
       DATABASE_USERNAME: process.env.DATABASE_USERNAME,
       DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
     } as any,
-    pool,
+    // pool,
   });
 
-  console.log(process.env.DATABASE_HOST);
+  console.log('process.env.DATABASE_HOST');
 
   const app = express();
-  app.use(createShadowMiddleware(`http://localhost:${shadowPort}`) as any);
+  app.use(liveDebuggerMiddleware);
+  // app.use(createShadowMiddleware(`http://localhost:${shadowPort}`) as any);
   app.use(cors());
   app.use(express.json());
   app.use(express.static(path.join(__dirname)));
@@ -117,13 +118,14 @@ async function startServer() {
       OPTION (MAXDOP 1);
     `;
 
-    const result = (await pool.request().query(query)).recordset;
+    // const result = (await pool.request().query(query)).recordset;
 
-    return result;
+    return [];
   }
 
   async function getUserStatistics(_userId?: number) {
-    return await getData("", []);
+    return [];
+    //return await getData("", []);
   }
 
   app.get("/api/users/stats", async (req, res) => {
@@ -176,10 +178,11 @@ async function startServer() {
   });
 
   app.get("/", (_req, res) => {
+    console.log("index.html");
     res.sendFile(path.join(__dirname, "index.html"));
   });
 
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 9000;
   app.listen(PORT, async () => {
     console.log(`Server is running on port ${PORT}`);
   });
