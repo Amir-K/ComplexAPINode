@@ -4,9 +4,10 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
+COPY .yalc/ .yalc/
 
 # Install dependencies
-RUN npm ci
+RUN npm i
 
 # Copy built files
 COPY dist ./dist
