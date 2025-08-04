@@ -10,7 +10,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import sql from "mssql";
-import { initializeLiveDebugger, createShadowMiddleware, liveDebuggerMiddleware } from "./nodeclient/index";
+import { initializeLiveDebugger, createShadowMiddleware, liveDebuggerMiddleware } from "livedebugger";
 
 // Entities
 @Entity("Users")
