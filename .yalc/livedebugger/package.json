@@ -1,0 +1,31 @@
+{
+  "name": "livedebugger",
+  "version": "0.0.15",
+  "main": "dist/nodeclient/index.js",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@types/express": "^5.0.1",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "mssql": "^11.0.1",
+    "node-fetch": "2.7.0",
+    "rxjs": "^7.8.2",
+    "source-map-js": "^1.2.1",
+    "tar": "^7.4.3",
+    "xhr2": "^0.2.1"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "ts-node test.ts"
+  },
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "ldfindsource": "dist/smlookup.js"
+  },
+  "yalcSig": "f2fd1fe63682efb6b0b9fb43cff5afea"
+}

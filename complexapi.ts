@@ -10,7 +10,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import sql from "mssql";
-import { initializeLiveDebugger, createShadowMiddleware, liveDebuggerMiddleware } from "./nodeclient/index";
+import { initializeLiveDebugger, createShadowMiddleware, liveDebuggerMiddleware } from "livedebugger";
 
 // Entities
 @Entity("Users")
@@ -182,7 +182,7 @@ async function startServer() {
     res.sendFile(path.join(__dirname, "index.html"));
   });
 
-  const PORT = process.env.PORT || 9000;
+  const PORT = process.env.PORT || 3000;
   app.listen(PORT, async () => {
     console.log(`Server is running on port ${PORT}`);
   });
